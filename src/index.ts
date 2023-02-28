@@ -1,7 +1,7 @@
 import type { Case } from "./types";
 import { Readable } from "node:stream";
 import { promises as fsp } from "fs";
-import path from "path";
+import path from "node:path";
 import { optimize as svgoOptimize } from "svgo";
 import toCase from "case";
 import isSVG from "is-svg";

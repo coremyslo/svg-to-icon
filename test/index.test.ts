@@ -1,5 +1,5 @@
 import { Icon } from "../src";
-import path from "path";
+import path from "node:path";
 import SVGIcons2SVGFontStream from "svgicons2svgfont";
 import type { Readable } from "node:stream";
 
