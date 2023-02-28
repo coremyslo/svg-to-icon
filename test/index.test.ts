@@ -42,7 +42,10 @@ test("icon name", () => {
     expect((new Icon(correctFileContentPath, { nameCase: "kebab" })).name).toBe("icon-home");
     expect((new Icon(correctFileContentPath, { nameCase: "header" })).name).toBe("Icon-Home");
     expect((new Icon(correctFileContentPath, { nameCase: "constant" })).name).toBe("ICON_HOME");
-    expect((new Icon(correctFileContentPath, { sourceDirPath: "/assets/" })).name).toBe("icons-icon-home");
+    expect((new Icon(correctFileContentPath, { sourceDirPath: path.join(__dirname, "assets") })).name).toBe("icons-icon-home");
+    expect((new Icon(correctFileContentPath, { sourceDirPath: path.join(__dirname, "assets/") })).name).toBe("icons-icon-home");
+    expect((new Icon(correctFileContentPath, { sourceDirPath: path.join(__dirname, "/assets") })).name).toBe("icons-icon-home");
+    expect((new Icon(correctFileContentPath, { sourceDirPath: path.join(__dirname, "/assets/") })).name).toBe("icons-icon-home");
 });
 
 test("icon read", async () => {

@@ -32,11 +32,9 @@ export class Icon {
         }
         if (options.sourceDirPath) {
             this.sourceDirPath = options.sourceDirPath;
-        }
-        if (this.sourceDirPath) {
-            this.name = toCase[this.nameCase](sourceFilePath.substring(sourceFilePath.indexOf(this.sourceDirPath) + this.sourceDirPath.length).slice(0, -4).replace(/\//g, "-"));
+            this.name = toCase[this.nameCase](path.relative(this.sourceDirPath, this.sourceFilePath).slice(0, -4));
         } else {
-            this.name = toCase[this.nameCase](path.parse(sourceFilePath).name);
+            this.name = toCase[this.nameCase](path.parse(this.sourceFilePath).name);
         }
     }
 
