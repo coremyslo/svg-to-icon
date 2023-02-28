@@ -79,6 +79,8 @@ console.log((await getFontStream([glyph])).toString());
 ## API
 ### new Icon(sourceFilePath, options)
 * `sourceFilePath: string`
+
+Absolute path to the icon file
 * `options: object`
   * `nameCase: "snake" | "pascal" | "camel" | "kebab" | "header" | "constant"` - optional, define case for icon name, see [case](https://www.npmjs.com/package/case) package for details.
     ```typescript
@@ -88,7 +90,7 @@ console.log((await getFontStream([glyph])).toString());
     const icon = new Icon(pathToFile, { nameCase: "camel" });
     console.log(icon.name) // logs "iconHome"
     ```
-  * `sourceDirPath: string` - optional, root folder for icon. If not set, only the filename of the icon will be considered as the name of the icon.
+  * `sourceDirPath: string` - optional, absolute path to root folder for icon. If not set, only the filename of the icon will be considered as the name of the icon.
     ```typescript
     import { Icon } from "svg2glyph";
 
