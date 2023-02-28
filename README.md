@@ -1,16 +1,16 @@
-# svg2glyph [![npm](https://img.shields.io/npm/v/svg2glyph)](https://www.npmjs.com/package/svg2glyph) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/coremyslo/svg2glyph/blob/master/LICENSE)
+# @coremyslo/svg-to-icon [![npm](https://img.shields.io/npm/v/@coremyslo/svg-to-icon)](https://www.npmjs.com/package/@coremyslo/svg-to-icon) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/coremyslo/svg-to-icon/blob/master/LICENSE)
 
 This module represents a helper class for reading and optimizing SVG files, returning their name based on path and file content, and generating glyphs
 ## Installation
 
 ```shell
-$ yarn add svg2glyph
+$ yarn add @coremyslo/svg-to-icon
 ```
 
 
 ## Usage
 ```typescript
-import { Icon } from "svg2glyph";
+import { Icon } from "@coremyslo/svg-to-icon";
 
 const pathToFile = path.join(__dirname, "./assets/icons/icon-home.svg")
 const icon = new Icon(pathToFile);
@@ -84,7 +84,7 @@ Absolute path to the icon file
 * `options: object`
   * `case: "snake" | "pascal" | "camel" | "kebab" | "header" | "constant"` - optional, define case for icon name, see [case](https://www.npmjs.com/package/case) package for details.
     ```typescript
-    import { Icon } from "svg2glyph";
+    import { Icon } from "@coremyslo/svg-to-icon";
 
     const pathToFile = path.join(__dirname, "./assets/icons/icon-home.svg")
     const icon = new Icon(pathToFile, { case: "camel" });
@@ -92,7 +92,7 @@ Absolute path to the icon file
     ```
   * `sourceDirPath: string` - optional, absolute path to root folder for icon. If not set, only the filename of the icon will be considered as the name of the icon.
     ```typescript
-    import { Icon } from "svg2glyph";
+    import { Icon } from "@coremyslo/svg-to-icon";
 
     const pathToFile = path.join(__dirname, "./assets/icons/icon-home.svg")
     const icon = new Icon(pathToFile, { sourceDirPath: "/assets/" });
