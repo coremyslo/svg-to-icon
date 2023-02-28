@@ -42,11 +42,11 @@ test("svg path incorrect", async () => {
 
 test("icon name", () => {
     expect((new Icon(correctFileContentPath)).name).toBe("icon-home");
-    expect((new Icon(correctFileContentPath, { nameCase: "snake" })).name).toBe("icon_home");
-    expect((new Icon(correctFileContentPath, { nameCase: "pascal" })).name).toBe("IconHome");
-    expect((new Icon(correctFileContentPath, { nameCase: "kebab" })).name).toBe("icon-home");
-    expect((new Icon(correctFileContentPath, { nameCase: "header" })).name).toBe("Icon-Home");
-    expect((new Icon(correctFileContentPath, { nameCase: "constant" })).name).toBe("ICON_HOME");
+    expect((new Icon(correctFileContentPath, { case: "snake" })).name).toBe("icon_home");
+    expect((new Icon(correctFileContentPath, { case: "pascal" })).name).toBe("IconHome");
+    expect((new Icon(correctFileContentPath, { case: "kebab" })).name).toBe("icon-home");
+    expect((new Icon(correctFileContentPath, { case: "header" })).name).toBe("Icon-Home");
+    expect((new Icon(correctFileContentPath, { case: "constant" })).name).toBe("ICON_HOME");
     expect((new Icon(correctFileContentPath, { sourceDirPath: path.join(__dirname, "assets") })).name).toBe("icons-icon-home");
     expect((new Icon(correctFileContentPath, { sourceDirPath: path.join(__dirname, "assets/") })).name).toBe("icons-icon-home");
     expect((new Icon(correctFileContentPath, { sourceDirPath: path.join(__dirname, "/assets") })).name).toBe("icons-icon-home");

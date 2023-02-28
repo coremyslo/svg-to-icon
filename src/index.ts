@@ -6,15 +6,16 @@ import { optimize as svgoOptimize } from "svgo";
 import toCase from "case";
 import isSVG from "is-svg";
 
-export interface IconOptions {
-    nameCase: Case;
+export interface Options {
+    case: Case;
     sourceDirPath: string;
 }
 
 export class Icon {
-    public nameCase: Case = "kebab";
-
-    public sourceDirPath = "";
+    public options: Options = {
+        case: "kebab",
+        sourceDirPath: "",
+    };
 
     public name: string;
 
@@ -22,19 +23,16 @@ export class Icon {
 
     public content = "";
 
-    public constructor (sourceFilePath: string, options: Partial<IconOptions> = {}) {
+    public constructor (sourceFilePath: string, options: Partial<Options> = {}) {
         if (path.parse(sourceFilePath).ext !== ".svg") {
             throw new Error(`${sourceFilePath} is not correct svg file path`);
         }
         this.sourceFilePath = sourceFilePath;
-        if (options.nameCase) {
-            this.nameCase = options.nameCase;
-        }
+        this.options = { ...this.options, ...options };
         if (options.sourceDirPath) {
-            this.sourceDirPath = options.sourceDirPath;
-            this.name = toCase[this.nameCase](path.relative(this.sourceDirPath, this.sourceFilePath).slice(0, -4));
+            this.name = toCase[this.options.case](path.relative(this.options.sourceDirPath, this.sourceFilePath).slice(0, -4));
         } else {
-            this.name = toCase[this.nameCase](path.parse(this.sourceFilePath).name);
+            this.name = toCase[this.options.case](path.parse(this.sourceFilePath).name);
         }
     }
 

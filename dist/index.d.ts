@@ -1,17 +1,16 @@
 /// <reference types="node" />
 import type { Case } from "./types";
 import { Readable } from "node:stream";
-export interface IconOptions {
-    nameCase: Case;
+export interface Options {
+    case: Case;
     sourceDirPath: string;
 }
 export declare class Icon {
-    nameCase: Case;
-    sourceDirPath: string;
+    options: Options;
     name: string;
     sourceFilePath: string;
     content: string;
-    constructor(sourceFilePath: string, options?: Partial<IconOptions>);
+    constructor(sourceFilePath: string, options?: Partial<Options>);
     optimize(): this;
     read(): Promise<this>;
     getGlyph(options: object): Readable;

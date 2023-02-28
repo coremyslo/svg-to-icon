@@ -21,23 +21,22 @@ const case_1 = __importDefault(require("case"));
 const is_svg_1 = __importDefault(require("is-svg"));
 class Icon {
     constructor(sourceFilePath, options = {}) {
-        this.nameCase = "kebab";
-        this.sourceDirPath = "";
+        this.options = {
+            case: "kebab",
+            sourceDirPath: "",
+        };
         this.sourceFilePath = "";
         this.content = "";
         if (node_path_1.default.parse(sourceFilePath).ext !== ".svg") {
             throw new Error(`${sourceFilePath} is not correct svg file path`);
         }
         this.sourceFilePath = sourceFilePath;
-        if (options.nameCase) {
-            this.nameCase = options.nameCase;
-        }
+        this.options = Object.assign(Object.assign({}, this.options), options);
         if (options.sourceDirPath) {
-            this.sourceDirPath = options.sourceDirPath;
-            this.name = case_1.default[this.nameCase](node_path_1.default.relative(this.sourceDirPath, this.sourceFilePath).slice(0, -4));
+            this.name = case_1.default[this.options.case](node_path_1.default.relative(this.options.sourceDirPath, this.sourceFilePath).slice(0, -4));
         }
         else {
-            this.name = case_1.default[this.nameCase](node_path_1.default.parse(this.sourceFilePath).name);
+            this.name = case_1.default[this.options.case](node_path_1.default.parse(this.sourceFilePath).name);
         }
     }
     optimize() {
