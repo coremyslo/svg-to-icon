@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Icon = void 0;
 const node_stream_1 = require("node:stream");
 const fs_1 = require("fs");
-const path_1 = __importDefault(require("path"));
+const node_path_1 = __importDefault(require("node:path"));
 const svgo_1 = require("svgo");
 const case_1 = __importDefault(require("case"));
 const is_svg_1 = __importDefault(require("is-svg"));
@@ -25,7 +25,7 @@ class Icon {
         this.sourceDirPath = "";
         this.sourceFilePath = "";
         this.content = "";
-        if (path_1.default.parse(sourceFilePath).ext !== ".svg") {
+        if (node_path_1.default.parse(sourceFilePath).ext !== ".svg") {
             throw new Error(`${sourceFilePath} is not correct svg file path`);
         }
         this.sourceFilePath = sourceFilePath;
@@ -34,12 +34,10 @@ class Icon {
         }
         if (options.sourceDirPath) {
             this.sourceDirPath = options.sourceDirPath;
-        }
-        if (this.sourceDirPath) {
-            this.name = case_1.default[this.nameCase](sourceFilePath.substring(sourceFilePath.indexOf(this.sourceDirPath) + this.sourceDirPath.length).slice(0, -4).replace(/\//g, "-"));
+            this.name = case_1.default[this.nameCase](node_path_1.default.relative(this.sourceDirPath, this.sourceFilePath).slice(0, -4));
         }
         else {
-            this.name = case_1.default[this.nameCase](path_1.default.parse(sourceFilePath).name);
+            this.name = case_1.default[this.nameCase](node_path_1.default.parse(this.sourceFilePath).name);
         }
     }
     optimize() {
