@@ -41,7 +41,7 @@ class Icon {
         }
     }
     optimize() {
-        if (this.content) {
+        if (!this.content) {
             throw new Error("content is not set yet");
         }
         this.content = (0, svgo_1.optimize)(this.content).data;
