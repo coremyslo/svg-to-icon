@@ -39,7 +39,7 @@ export class Icon {
     }
 
     public optimize (): this {
-        if (this.content) {
+        if (!this.content) {
             throw new Error("content is not set yet");
         }
         this.content = svgoOptimize(this.content).data;

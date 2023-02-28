@@ -6,7 +6,12 @@ import type { Readable } from "node:stream";
 // "snake" | "pascal" | "camel" | "kebab" | "header" | "constant"
 
 const correctFileContentPath = path.join(__dirname, "./assets/icons/icon-home.svg");
-const correctFileContent = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"48\" width=\"48\"><path d=\"M11 39h7.5V26.5h11V39H37V19.5L24 9.75 11 19.5Zm-3 3V18L24 6l16 12v24H26.5V29.5h-5V42Zm16-17.65Z\"/></svg>\n";
+const correctFileContent = `<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+    <path d="M11 39h7.5V26.5h11V39H37V19.5L24 9.75 11 19.5Zm-3 3V18L24 6l16 12v24H26.5V29.5h-5V42Zm16-17.65Z"/>
+</svg>
+`;
+const correctFileContentOptimized = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"48\" height=\"48\"><path d=\"M11 39h7.5V26.5h11V39H37V19.5L24 9.75 11 19.5Zm-3 3V18L24 6l16 12v24H26.5V29.5h-5V42Zm16-17.65Z\"/></svg>";
+
 const correctFontFileContent = `<?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <svg xmlns="http://www.w3.org/2000/svg">
@@ -48,16 +53,12 @@ test("icon name", () => {
     expect((new Icon(correctFileContentPath, { sourceDirPath: path.join(__dirname, "/assets/") })).name).toBe("icons-icon-home");
 });
 
-test("icon read", async () => {
-    const icon = new Icon(correctFileContentPath);
-    await icon.read();
-    expect(icon.content).toBe(correctFileContent);
-});
-
 test("icon read and optimize", async () => {
     const icon = new Icon(correctFileContentPath);
     await icon.read();
     expect(icon.content).toBe(correctFileContent);
+    icon.optimize();
+    expect(icon.content).toBe(correctFileContentOptimized);
 });
 
 
