@@ -31,13 +31,10 @@ const correctFontFileContent = `<?xml version="1.0" standalone="no"?>
 
 test("svg path incorrect", async () => {
     const notSvgFilePath = path.join(__dirname, "./assets/icons/icon-home.txt");
-    try {
+    await expect(async () => {
         const icon = new Icon(notSvgFilePath);
         await icon.read();
-    } catch (e) {
-        expect(e).toBeInstanceOf(Error);
-        expect(e).toHaveProperty("message", `${notSvgFilePath} is not correct svg file path`);
-    }
+    }).rejects.toThrow(`${notSvgFilePath} is not correct svg file path`);
 });
 
 test("icon name", () => {
@@ -64,24 +61,18 @@ test("icon read and optimize", async () => {
 
 test("icon read empty file content", async () => {
     const emptyFileContentPath = path.join(__dirname, "./assets/icons/icon-empty.svg");
-    try {
+    await expect(async () => {
         const icon = new Icon(emptyFileContentPath);
         await icon.read();
-    } catch (e) {
-        expect(e).toBeInstanceOf(Error);
-        expect(e).toHaveProperty("message", `${emptyFileContentPath} file content is not valid svg`);
-    }
+    }).rejects.toThrow(`${emptyFileContentPath} file content is not valid svg`);
 });
 
 test("icon read corrupted file content", async () => {
     const corruptedFileContentPath = path.join(__dirname, "./assets/icons/icon-corrupted.svg");
-    try {
+    await expect(async () => {
         const icon = new Icon(corruptedFileContentPath);
         await icon.read();
-    } catch (e) {
-        expect(e).toBeInstanceOf(Error);
-        expect(e).toHaveProperty("message", `${corruptedFileContentPath} file content is not valid svg`);
-    }
+    }).rejects.toThrow(`${corruptedFileContentPath} file content is not valid svg`);
 });
 test("icon glyph", async () => {
     const icon = new Icon(correctFileContentPath);
