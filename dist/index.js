@@ -39,11 +39,11 @@ class Icon {
             this.name = case_1.default[this.options.case](node_path_1.default.parse(this.sourceFilePath).name);
         }
     }
-    optimize() {
+    optimize(config = { plugins: ["preset-default", "removeDimensions"] }) {
         if (!this.content) {
             throw new Error("content is not set yet");
         }
-        this.content = (0, svgo_1.optimize)(this.content).data;
+        this.content = (0, svgo_1.optimize)(this.content, config).data;
         return this;
     }
     read() {

@@ -101,8 +101,9 @@ Absolute path to the icon file
 ### `read(): Promise<this>`
 Asynchronously reads the file specified by the sourceFilePath parameter passed to the constructor.
 
-### `optimize(): this`
+### `optimize(config: Config): this`
 Synchronously rewrites `icon.content` with the optimized version of the SVG, using the [svgo](https://www.npmjs.com/package/svgo) package.
+* `config: Config` - optional, configuration object for the [svgo](https://www.npmjs.com/package/svgo) package. If not set, the default configuration will be used.
 
 ### `getGlyph(options): Readable`
 Returns a node `Readable` stream object.

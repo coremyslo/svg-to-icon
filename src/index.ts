@@ -2,7 +2,7 @@ import type { Case } from "./types";
 import { Readable } from "node:stream";
 import { promises as fsp } from "fs";
 import path from "node:path";
-import { optimize as svgoOptimize } from "svgo";
+import { type Config, optimize as svgoOptimize } from "svgo";
 import toCase from "case";
 import isSVG from "is-svg";
 
@@ -36,11 +36,11 @@ export class Icon {
         }
     }
 
-    public optimize (): this {
+    public optimize (config: Config = { plugins: ["preset-default", "removeDimensions"] }): this {
         if (!this.content) {
             throw new Error("content is not set yet");
         }
-        this.content = svgoOptimize(this.content).data;
+        this.content = svgoOptimize(this.content, config).data;
 
         return this;
     }
